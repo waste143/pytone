@@ -24,7 +24,7 @@ sys.setdefaultencoding("utf-8")
 
 TOKEN = '240545787:AAEwAOm2aKRcHVSYtLQ6gD-OBJFqCheA_OQ'
 bot = telebot.TeleBot(TOKEN)
-is_sudo = '142141024'
+is_sudo = '255872558'
 rediss = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 f = "\n \033[01;30m Bot Firstname: {} \033[0m".format(bot.get_me().first_name)
@@ -65,17 +65,17 @@ def send_pic(m):
 def welcome(m):
     cid = m.chat.id
     markup = types.InlineKeyboardMarkup()
-    c = types.InlineKeyboardButton("About",callback_data='pouria')
+    c = types.InlineKeyboardButton("About",callback_data='Masih')
     markup.add(c)
     b = types.InlineKeyboardButton("Help",callback_data='help')
     markup.add(b)
     nn = types.InlineKeyboardButton("Inline Mode", switch_inline_query='')
     markup.add(nn)
-    oo = types.InlineKeyboardButton("Channel", url='https://telegram.me/CyberCH')
+    oo = types.InlineKeyboardButton("Channel", url='https://telegram.me/MasihHack')
     markup.add(oo)
     id = m.from_user.id
     rediss.sadd('memberspy',id)
-    bot.send_message(cid, "*Hi*\n_Welcome To CyberBot_\n*Please Choose One*", disable_notification=True, reply_markup=markup, parse_mode='Markdown')
+    bot.send_message(cid, "*Hi*\n_Welcome To ELKingsBot_\n*Please Choose One*", disable_notification=True, reply_markup=markup, parse_mode='Markdown')
 
 #################################################################################################################################################################################################
 
@@ -86,7 +86,7 @@ def callback_inline(call):
             bot.answer_callback_query(callback_query_id=call.id, show_alert=True, text="Send /help Command!")
      if call.message:
         if call.data == "pouria":
-            bot.answer_callback_query(callback_query_id=call.id, show_alert=True, text="CyberBot Created By @This_Is_Pouria And Written In Python")
+            bot.answer_callback_query(callback_query_id=call.id, show_alert=True, text="ElKinkgs Created By @FuckUp And Written In Python")
      if call.message:
         if call.data == "sticker":
             bot.answer_callback_query(callback_query_id=call.id, show_alert=False, text=":D")
@@ -131,7 +131,7 @@ def send_stats(m):
 
 @bot.message_handler(commands=['ban'])
 def kick(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 255872558:
       if m.reply_to_message:
         ids = m.reply_to_message.from_user.id
         rediss.sadd('banlist',int(ids))
@@ -142,7 +142,7 @@ def kick(m):
 
 @bot.message_handler(commands=['unban'])
 def send_stats(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 255872558:
       if m.reply_to_message:
         ids = m.reply_to_message.from_user.id
         rediss.srem('banlist',int(ids))
@@ -166,7 +166,7 @@ def aparat(m):
     gif = parsed_json['src']
     link = parsed_json['gimpHost']
     urllib.urlretrieve("{}".format(gif), "gif.gif")
-    bot.send_document(m.chat.id, open('gif.gif'), caption="@Cyber_KingDom_Bot")
+    bot.send_document(m.chat.id, open('gif.gif'), caption="@ELKingsBot")
 
 #################################################################################################################################################################################################
 
@@ -188,7 +188,7 @@ def hi(m):
     name = m.new_chat_member.first_name
     title = m.chat.title
     ids = m.new_chat_member.id
-    if id == 142141024:
+    if id == 255872558:
         rediss.sadd('chats',ids)
         bot.send_message(m.chat.id, '*Hi!\nPlease Start Me In Pravite*', parse_mode='Markdown')
     else:
@@ -198,7 +198,7 @@ def hi(m):
 
 @bot.message_handler(commands=['cleanban'])
 def kick(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 255872558:
         rediss.delete('banlist')
         bot.send_message(m.chat.id, '<b>Cleaned!</b>',parse_mode='HTML')
 
@@ -213,7 +213,7 @@ def hi(m):
 
 @bot.message_handler(commands=['kick'])
 def kick(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 255872558:
       if m.reply_to_message:
         text = m.reply_to_message.from_user.id
         bot.kick_chat_member(m.chat.id, text)
@@ -422,7 +422,7 @@ def query_text(query):
     news = types.InlineQueryResultArticle('8', 'News', types.InputTextMessageContent('1. :'+title+'\n\n2. :'+title2+'\n\n3. :'+title3), reply_markup=markup, thumb_url=news_tmp)
 
     mark_tmp = 'https://storage.pwrtelegram.xyz/Cyber_KingDom_Bot/photo/file_555.jpg'
-    markdown = types.InlineQueryResultArticle('9', 'Markdown', types.InputTextMessageContent('*@Cyber_KingDom_Bot markdown [Your Text]*', parse_mode='Markdown'), thumb_url=mark_tmp)
+    markdown = types.InlineQueryResultArticle('9', 'Markdown', types.InputTextMessageContent('*@ELKingsBot markdown [Your Text]*', parse_mode='Markdown'), thumb_url=mark_tmp)
 
     bot.answer_inline_query(query.id, [info, dollar, randowm, joke, since, timesend, news, hi, markdown], cache_time=5, switch_pm_text='Start bot')
 
@@ -710,7 +710,7 @@ def clac(m):
 
 @bot.message_handler(commands=['setrank'])
 def clac(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 255872558:
         text = m.text.split()[1]
         tezt = m.text.split()[2]
         rediss.hset("user:rank","{}".format(text),"{}".format(tezt))
@@ -732,7 +732,7 @@ def clac(m):
 
 @bot.message_handler(commands=['bc'])
 def clac(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 255872558:
         text = m.text.replace("/bc ","")
         rd = rediss.smembers('memberspy')
         for id in rd:
@@ -745,7 +745,7 @@ def clac(m):
 
 @bot.message_handler(commands=['delrank'])
 def kick(m):
-    if m.from_user.id == 142141024:
+    if m.from_user.id == 255872558:
         id = m.text.replace("/delrank ","")
         rank = rediss.hdel("user:rank","{}".format(id))
         bot.send_message(m.chat.id, '<code>Cleaned!</code>',parse_mode='HTML')
@@ -835,7 +835,7 @@ def feed_back(message):
 	
 def process_pm(message):
 	text = message.text
-	bot.forward_message(142141024, message.from_user.id, message_id=message.message_id)
+	bot.forward_message(255872558, message.from_user.id, message_id=message.message_id)
 
 #################################################################################################################################################################################################
 bot.polling(True)
